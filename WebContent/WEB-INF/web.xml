@@ -94,6 +94,11 @@
     <servlet-name>GetResolvedRequests</servlet-name>
     <servlet-class>stark.project.servlets.GetResolvedRequests</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>ResolveRequest</servlet-name>
+    <servlet-class>stark.project.servlets.ResolveRequest</servlet-class>
+  </servlet>
   <filter>
     <display-name>EmployeeFilter</display-name>
     <filter-name>EmployeeFilter</filter-name>
