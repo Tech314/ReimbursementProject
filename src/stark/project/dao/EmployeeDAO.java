@@ -94,7 +94,6 @@ public class EmployeeDAO {
 		return u;
 	}
 	
-	@SuppressWarnings("resource")
 	public static void insertEmployee(Users emp) {
 		try {
 			getConnection();

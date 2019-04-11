@@ -9,11 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import stark.project.dao.EmployeeDAO;
 import stark.project.dao.RequestDAO;
 import stark.project.util.Requests;
+import stark.project.util.Users;
 
 /**
  * Servlet implementation class GetAllEmpRequests
@@ -36,12 +39,15 @@ public class GetAllEmpRequests extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json");
+		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
 		ObjectMapper map = new ObjectMapper();
 		
-		ArrayList<Requests> requests = RequestDAO.getAllRequests();
+		Users user = EmployeeDAO.getInfo((String)session.getAttribute("user"));
 		
-		System.out.println(map.writeValueAsString(requests));
+		ArrayList<Requests> requests = RequestDAO.getAllRequests(Integer.parseInt(user.getId()));
+		
+		out.print(map.writeValueAsString(requests));
 		
 		out.close();
 	}

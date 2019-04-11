@@ -79,6 +79,21 @@
     <servlet-name>GetRequestsByEmployee</servlet-name>
     <servlet-class>stark.project.servlets.GetRequestsByEmployee</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>GetAllRequests</servlet-name>
+    <servlet-class>stark.project.servlets.GetAllRequests</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>GetPendingRequests</servlet-name>
+    <servlet-class>stark.project.servlets.GetPendingRequests</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>GetResolvedRequests</servlet-name>
+    <servlet-class>stark.project.servlets.GetResolvedRequests</servlet-class>
+  </servlet>
   <filter>
     <display-name>EmployeeFilter</display-name>
     <filter-name>EmployeeFilter</filter-name>

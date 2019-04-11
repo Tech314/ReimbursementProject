@@ -9,26 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import stark.project.dao.EmployeeDAO;
 import stark.project.dao.RequestDAO;
 import stark.project.util.Requests;
-import stark.project.util.Users;
 
 /**
- * Servlet implementation class GetResolvedEmpRequests
+ * Servlet implementation class GetAllRequests
  */
-@WebServlet("/GetResolvedEmpRequests")
-public class GetResolvedEmpRequests extends HttpServlet {
+@WebServlet("/GetAllRequests")
+public class GetAllRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetResolvedEmpRequests() {
+    public GetAllRequests() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,13 +36,10 @@ public class GetResolvedEmpRequests extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json");
-		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
 		ObjectMapper map = new ObjectMapper();
 		
-		Users user = EmployeeDAO.getInfo((String)session.getAttribute("user"));
-		
-		ArrayList<Requests> requests = RequestDAO.getResolvedRequests(Integer.parseInt(user.getId()));
+		ArrayList<Requests> requests = RequestDAO.getAllRequests();
 		
 		out.print(map.writeValueAsString(requests));
 		
