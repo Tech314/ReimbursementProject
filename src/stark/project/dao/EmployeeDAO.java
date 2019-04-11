@@ -203,4 +203,31 @@ public class EmployeeDAO {
 		
 		return users;
 	}
+	
+	public static boolean resetPass(int eid, String newPass) {
+		boolean reset = false;
+		getConnection();
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("update employees set user_pass=? where employee_id=?");
+			ps.setString(1, newPass);
+			ps.setInt(2, eid);
+			
+			if(ps.executeUpdate() != 0) {
+				reset = true;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return reset;
+	}
 }

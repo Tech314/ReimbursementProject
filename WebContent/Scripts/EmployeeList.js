@@ -10,6 +10,18 @@ const createOnStartUp = () => {
 	sendAjaxGet(url, display);
 }
 
+const sendAjaxPost = (url, eid) => {
+	let xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
+	xhr.onreadystatechange = function() {
+		if (this.readyState==4 && this.status==200) {
+			alert(this.responseText);
+		}
+	}
+	xhr.open("POST", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("eid=" + eid);
+}
+
 const sendAjaxGet = (url, func) => {
 	//ActiveXObject for IE9 and older compatibility
 	let xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
@@ -36,12 +48,13 @@ const display = (xhr) => {
 		let newRow = document.createElement("tr");
 
 		newRow.innerHTML = 
-			`<td>${requestArr[i].id}</td>
-			<td>${requestArr[i].fname}</td>
-			<td>${requestArr[i].lname}</td> 
-			<td>${requestArr[i].uname}</td> 
-			<td>${requestArr[i].email}</td> 
-			`
+			"<td>" + requestArr[i].id + "</td>" +
+			"<td>" + requestArr[i].fname + "</td>" +
+			"<td>" + requestArr[i].lname + "</td>" + 
+			"<td>" + requestArr[i].uname + "</td>" + 
+			"<td>" + requestArr[i].email + "</td>" +
+			"<td><input type='button' value='Reset Password' onclick='resetPassword(" + requestArr[i].id + ")'></td>";
+			
 		newBody.appendChild(newRow);
 		
 	}
@@ -102,4 +115,10 @@ const compare = (a,b) => {
 			return (a.email < b.email) ? 1 : -1;
 		}
 	}
+}
+
+const resetPassword = (eid) => {
+	let url = "../ResetPassword";
+	
+	sendAjaxPost(url,eid);
 }

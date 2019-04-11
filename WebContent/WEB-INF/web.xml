@@ -99,6 +99,11 @@
     <servlet-name>ResolveRequest</servlet-name>
     <servlet-class>stark.project.servlets.ResolveRequest</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>ResetPassword</servlet-name>
+    <servlet-class>stark.project.servlets.ResetPassword</servlet-class>
+  </servlet>
   <filter>
     <display-name>EmployeeFilter</display-name>
     <filter-name>EmployeeFilter</filter-name>
