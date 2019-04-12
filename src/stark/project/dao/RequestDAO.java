@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.servlet.http.Part;
+//import javax.servlet.http.Part;
 
 import stark.project.util.Requests;
 //import stark.project.util.Users;
@@ -48,15 +48,15 @@ public class RequestDAO {
 			while(rs.next()) {
 				req = new Requests(
 						rs.getInt("request_id"),
-						rs.getInt("Employee_id"),
+						rs.getInt("employee_id"),
 						rs.getInt("manager_id"),
 						rs.getDate("request_date"),
 						rs.getDate("expense_date"),
 						rs.getDouble("request_amt"),
 						rs.getString("request_desc"),
 						rs.getString("request_status"),
-						rs.getString("request_decision"),
-						(Part)rs.getBlob("receipt_photo"));
+						rs.getString("request_decision"));
+				//req.setPic(rs.getBlob("receipt_photo"));
 				es.setInt(1,req.getEmpId());
 				ms.setInt(1, req.getManId());
 				emp = es.executeQuery();
@@ -104,15 +104,15 @@ public class RequestDAO {
 			if(rs.next()) {
 				req = new Requests(
 						rs.getInt("request_id"),
-						rs.getInt("Employee_id"),
+						rs.getInt("employee_id"),
 						rs.getInt("manager_id"),
 						rs.getDate("request_date"),
 						rs.getDate("expense_date"),
 						rs.getDouble("request_amt"),
 						rs.getString("request_desc"),
 						rs.getString("request_status"),
-						rs.getString("request_decision"),
-						(Part)rs.getBlob("receipt_photo"));
+						rs.getString("request_decision"));
+				//req.setPic(rs.getBlob("receipt_photo"));
 				es.setInt(1,req.getEmpId());
 				ms.setInt(1, req.getManId());
 				emp = es.executeQuery();
@@ -147,21 +147,40 @@ public class RequestDAO {
 		getConnection();
 		
 		try {
-			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from requests where request_status='Pending'");
+			PreparedStatement st = conn.prepareStatement("select * from requests where request_status='Pending'");
+			ResultSet rs = st.executeQuery();
+			ResultSet emp = null;
+			ResultSet man = null;
+			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			Requests req = null;
 			
 			while(rs.next()) {
-				requests.add(new Requests(
+				req = new Requests(
 						rs.getInt("request_id"),
-						rs.getInt("Employee_id"),
+						rs.getInt("employee_id"),
 						rs.getInt("manager_id"),
 						rs.getDate("request_date"),
 						rs.getDate("expense_date"),
 						rs.getDouble("request_amt"),
 						rs.getString("request_desc"),
 						rs.getString("request_status"),
-						rs.getString("request_decision"),
-						(Part)rs.getBlob("receipt_photo")));
+						rs.getString("request_decision"));
+				//req.setPic(rs.getBlob("receipt_photo"));
+				es.setInt(1,req.getEmpId());
+				ms.setInt(1, req.getManId());
+				emp = es.executeQuery();
+				man = ms.executeQuery();
+				if(emp.next()) {
+					req.setEmpFName(emp.getString("fname"));
+					req.setEmpLName(emp.getString("lname"));
+				}
+				if(man.next()) {
+					req.setManFName(man.getString("fname"));
+					req.setManLName(man.getString("lname"));
+				}
+				
+				requests.add(req);
 			}
 		}
 		catch(SQLException e) {
@@ -186,19 +205,38 @@ public class RequestDAO {
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from requests where request_status='Resolved'");
+			ResultSet emp = null;
+			ResultSet man = null;
+			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			Requests req = null;
 			
 			while(rs.next()) {
-				requests.add(new Requests(
+				req = new Requests(
 						rs.getInt("request_id"),
-						rs.getInt("Employee_id"),
+						rs.getInt("employee_id"),
 						rs.getInt("manager_id"),
 						rs.getDate("request_date"),
 						rs.getDate("expense_date"),
 						rs.getDouble("request_amt"),
 						rs.getString("request_desc"),
 						rs.getString("request_status"),
-						rs.getString("request_decision"),
-						(Part)rs.getBlob("receipt_photo")));
+						rs.getString("request_decision"));
+				//req.setPic(rs.getBlob("receipt_photo"));
+				es.setInt(1,req.getEmpId());
+				ms.setInt(1, req.getManId());
+				emp = es.executeQuery();
+				man = ms.executeQuery();
+				if(emp.next()) {
+					req.setEmpFName(emp.getString("fname"));
+					req.setEmpLName(emp.getString("lname"));
+				}
+				if(man.next()) {
+					req.setManFName(man.getString("fname"));
+					req.setManLName(man.getString("lname"));
+				}
+				
+				requests.add(req);
 			}
 		}
 		catch(SQLException e) {
@@ -241,8 +279,8 @@ public class RequestDAO {
 						rs.getDouble("request_amt"),
 						rs.getString("request_desc"),
 						rs.getString("request_status"),
-						rs.getString("request_decision"),
-						(Part)rs.getBlob("receipt_photo"));
+						rs.getString("request_decision"));
+				//req.setPic(rs.getBlob("receipt_photo"));
 				es.setInt(1,req.getEmpId());
 				ms.setInt(1, req.getManId());
 				emp = es.executeQuery();
@@ -299,8 +337,8 @@ public class RequestDAO {
 						rs.getDouble("request_amt"),
 						rs.getString("request_desc"),
 						rs.getString("request_status"),
-						rs.getString("request_decision"),
-						(Part)rs.getBlob("receipt_photo"));
+						rs.getString("request_decision"));
+				//req.setPic(rs.getBlob("receipt_photo"));
 				es.setInt(1,req.getEmpId());
 				ms.setInt(1, req.getManId());
 				emp = es.executeQuery();
@@ -357,8 +395,8 @@ public class RequestDAO {
 						rs.getDouble("request_amt"),
 						rs.getString("request_desc"),
 						rs.getString("request_status"),
-						rs.getString("request_decision"),
-						(Part)rs.getBlob("receipt_photo"));
+						rs.getString("request_decision"));
+				//req.setPic(rs.getBlob("receipt_photo"));
 				es.setInt(1,req.getEmpId());
 				ms.setInt(1, req.getManId());
 				emp = es.executeQuery();

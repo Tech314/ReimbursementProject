@@ -28,19 +28,17 @@ const display = (xhr) => {
 	table.appendChild(newBody);
 	for (i in requestArr) {
 		let newRow = document.createElement("tr");
-
+		
 		newRow.innerHTML = 
-			`<td>${requestArr[i].Id}</td>
-			<td>${requestArr[i].reqDate}</td>
-			<td>${requestArr[i].expDate}</td> 
-			<td>${requestArr[i].reqAmt}</td> 
-			<td>${requestArr[i].reqDesc}</td> 
-			<td>${requestArr[i].reqStatus}</td>
-			<td>${requestArr[i].reqDecision}</td>
-			`
+			"<td>" + requestArr[i].reqDate + "</td>" +
+			"<td>" + requestArr[i].expDate + "</td>" + 
+			"<td>" + requestArr[i].reqAmt + "</td>" +
+			"<td>" + requestArr[i].reqDesc + "</td>" + 
+			"<td>" + requestArr[i].reqStatus + "</td>" +
+			"<td>" + requestArr[i].reqDecision + "</td>";
+			
 		newBody.appendChild(newRow);
 		
-	//console.log(requestArr);
 	}
 }
 

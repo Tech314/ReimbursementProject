@@ -64,7 +64,7 @@ public class SubmitRequest extends HttpServlet {
 		req.setExpDate(expDate);
 		req.setReqAmt(expAmt);
 		req.setReqDesc(expDesc);
-		req.setReqDecision("Pending");
+		req.setReqStatus("Pending");
 		req.setExpReceipt(pic);
 		
 		RequestDAO.insertRequest(req);

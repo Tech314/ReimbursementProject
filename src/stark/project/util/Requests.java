@@ -1,5 +1,6 @@
 package stark.project.util;
 
+import java.sql.Blob;
 import java.sql.Date;
 
 import javax.servlet.http.Part;
@@ -20,13 +21,14 @@ public class Requests {
 	private String empLName;
 	private String manFName;
 	private String manLName;
+	private Blob pic;
 	
 	public Requests() {
 		
 	}
 
 	public Requests(int reqId, int empId, int manId, Date reqDate, Date expDate, double reqAmt, String reqDesc,
-			String reqStatus, String reqDecision, Part expReceipt) {
+			String reqStatus, String reqDecision) {
 		this.reqId = reqId;
 		this.empId = empId;
 		this.manId = manId;
@@ -36,7 +38,6 @@ public class Requests {
 		this.reqDesc = reqDesc;
 		this.reqStatus = reqStatus;
 		this.reqDecision = reqDecision;
-		this.expReceipt = expReceipt;
 	}
 
 	public int getReqId() {
@@ -149,6 +150,15 @@ public class Requests {
 
 	public void setManLName(String manLName) {
 		this.manLName = manLName;
+	}
+	
+
+	public Blob getPic() {
+		return pic;
+	}
+
+	public void setPic(Blob pic) {
+		this.pic = pic;
 	}
 
 	@Override

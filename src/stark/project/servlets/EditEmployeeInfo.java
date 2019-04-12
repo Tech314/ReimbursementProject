@@ -3,6 +3,7 @@ package stark.project.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,11 +49,12 @@ public class EditEmployeeInfo extends HttpServlet {
 				&& !request.getParameter("newPass").equals("")) {
 			user.setPass(request.getParameter("newPass"));
 		}
-		else if(!request.getParameter("newPass").equals(request.getParameter("newPass2")) 
+		if(!request.getParameter("newPass").equals(request.getParameter("newPass2")) 
 				&& !request.getParameter("newPass").equals("")
 				&& !request.getParameter("newPass2").equals("")){
 			out.print("New passwords don't match");
-			response.sendRedirect("Emploees/EmployeeInfoEdit.html");  
+			RequestDispatcher rd = request.getRequestDispatcher("/Employees/EmployeeInfoEdit.html");
+			rd.include(request, response);
 		}
 		
 		if(!request.getParameter("newEmail").equals("")) {
@@ -62,11 +64,13 @@ public class EditEmployeeInfo extends HttpServlet {
 		if(request.getParameter("oldPass").equals(user.getPass())) {
 			EmployeeDAO.editEmpInf(user);
 			out.print("Info updated successfully");
-			response.sendRedirect("Employees/EmployeeInfoEdit.html");  
+			RequestDispatcher rd = request.getRequestDispatcher("/Employees/EmployeeInfoEdit.html");
+			rd.include(request, response);
 		}
-		else {
+		if(!request.getParameter("oldPass").equals(user.getPass())) {
 			out.print("Old password does not match existing password");
-			response.sendRedirect("Employees/EmployeeInfoEdit.html");  
+			RequestDispatcher rd = request.getRequestDispatcher("/Employees/EmployeeInfoEdit.html");
+			rd.include(request, response);
 		}
 		
 		out.close();
