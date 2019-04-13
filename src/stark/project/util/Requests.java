@@ -22,6 +22,7 @@ public class Requests {
 	private String manFName;
 	private String manLName;
 	private Blob pic;
+	private String email;
 	
 	public Requests() {
 		
@@ -159,6 +160,14 @@ public class Requests {
 
 	public void setPic(Blob pic) {
 		this.pic = pic;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override

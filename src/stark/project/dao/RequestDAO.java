@@ -41,7 +41,7 @@ public class RequestDAO {
 			ResultSet rs = st.executeQuery("select * from requests");
 			ResultSet emp = null;
 			ResultSet man = null;
-			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
 			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
 			Requests req = null;
 			
@@ -64,6 +64,7 @@ public class RequestDAO {
 				if(emp.next()) {
 					req.setEmpFName(emp.getString("fname"));
 					req.setEmpLName(emp.getString("lname"));
+					req.setEmail(emp.getString("email"));
 				}
 				if(man.next()) {
 					req.setManFName(man.getString("fname"));
@@ -98,7 +99,7 @@ public class RequestDAO {
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
 			ResultSet man = null;
-			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
 			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
 			
 			if(rs.next()) {
@@ -120,6 +121,7 @@ public class RequestDAO {
 				if(emp.next()) {
 					req.setEmpFName(emp.getString("fname"));
 					req.setEmpLName(emp.getString("lname"));
+					req.setEmail(emp.getString("email"));
 				}
 				if(man.next()) {
 					req.setManFName(man.getString("fname"));
@@ -151,7 +153,7 @@ public class RequestDAO {
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
 			ResultSet man = null;
-			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
 			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
 			Requests req = null;
 			
@@ -174,6 +176,7 @@ public class RequestDAO {
 				if(emp.next()) {
 					req.setEmpFName(emp.getString("fname"));
 					req.setEmpLName(emp.getString("lname"));
+					req.setEmail(emp.getString("email"));
 				}
 				if(man.next()) {
 					req.setManFName(man.getString("fname"));
@@ -207,7 +210,7 @@ public class RequestDAO {
 			ResultSet rs = st.executeQuery("select * from requests where request_status='Resolved'");
 			ResultSet emp = null;
 			ResultSet man = null;
-			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
 			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
 			Requests req = null;
 			
@@ -230,6 +233,7 @@ public class RequestDAO {
 				if(emp.next()) {
 					req.setEmpFName(emp.getString("fname"));
 					req.setEmpLName(emp.getString("lname"));
+					req.setEmail(emp.getString("email"));
 				}
 				if(man.next()) {
 					req.setManFName(man.getString("fname"));
@@ -265,7 +269,7 @@ public class RequestDAO {
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
 			ResultSet man = null;
-			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
 			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
 			Requests req = null;
 			
@@ -288,6 +292,7 @@ public class RequestDAO {
 				if(emp.next()) {
 					req.setEmpFName(emp.getString("fname"));
 					req.setEmpLName(emp.getString("lname"));
+					req.setEmail(emp.getString("email"));
 				}
 				if(man.next()) {
 					req.setManFName(man.getString("fname"));
@@ -323,7 +328,7 @@ public class RequestDAO {
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
 			ResultSet man = null;
-			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
 			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
 			Requests req = null;
 			
@@ -346,6 +351,7 @@ public class RequestDAO {
 				if(emp.next()) {
 					req.setEmpFName(emp.getString("fname"));
 					req.setEmpLName(emp.getString("lname"));
+					req.setEmail(emp.getString("email"));
 				}
 				if(man.next()) {
 					req.setManFName(man.getString("fname"));
@@ -381,7 +387,7 @@ public class RequestDAO {
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
 			ResultSet man = null;
-			PreparedStatement es = conn.prepareStatement("select fname,lname from employees where employee_id=?");
+			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
 			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
 			Requests req = null;
 			
@@ -404,6 +410,7 @@ public class RequestDAO {
 				if(emp.next()) {
 					req.setEmpFName(emp.getString("fname"));
 					req.setEmpLName(emp.getString("lname"));
+					req.setEmail(emp.getString("email"));
 				}
 				if(man.next()) {
 					req.setManFName(man.getString("fname"));

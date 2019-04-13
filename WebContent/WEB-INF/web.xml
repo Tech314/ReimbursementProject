@@ -104,6 +104,16 @@
     <servlet-name>ResetPassword</servlet-name>
     <servlet-class>stark.project.servlets.ResetPassword</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>GetManagerHomeInfo</servlet-name>
+    <servlet-class>stark.project.servlets.GetManagerHomeInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>GetEmployeeHomeInfo</servlet-name>
+    <servlet-class>stark.project.servlets.GetEmployeeHomeInfo</servlet-class>
+  </servlet>
   <filter>
     <display-name>EmployeeFilter</display-name>
     <filter-name>EmployeeFilter</filter-name>

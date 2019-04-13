@@ -41,7 +41,7 @@ public class GetPendingRequests extends HttpServlet {
 		
 		ArrayList<Requests> requests = RequestDAO.getPendingRequests();
 		
-		System.out.println(map.writeValueAsString(requests));
+		//System.out.println(map.writeValueAsString(requests));
 		out.print(map.writeValueAsString(requests));
 		
 		out.close();

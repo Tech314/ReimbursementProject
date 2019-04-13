@@ -22,7 +22,7 @@ const sendAjaxGet = (url, func) => {
 
 const display = (xhr) => {
 	requestArr = JSON.parse(xhr.responseText);
-	console.log(requestArr);
+	//console.log(requestArr);
 	let table = document.getElementById("empTable");
 	table.removeChild(document.getElementById("requestTableBody"));
 	let newBody = document.createElement("tbody");

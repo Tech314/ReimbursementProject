@@ -22,16 +22,48 @@
 					<a class="nav-link" href="index.html">Home Page</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="about.html">About Us</a>
-				</li>
-				<li class="nav-item">
 					<a class="nav-link" href="LoginPage.html">Login</a>
 				</li> 
 			</ul>
 		</div> 
 	</nav>
 
-	<h1>Welcome!</h1>
+	<h1>Welcome to the Stark, Stark, and Stark Employee Reimbursement Portal</h1>
+	
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="container">
+				<div class="jumbotron">
+					<h5>Helpful Links:</h5>
+					<ul>
+						<li><a href="https://law.lis.virginia.gov/vacode/title2.2/chapter28/" target="_blank">State of Virginia Regulations</a></li>
+						<li><a href="https://www.laborlawcenter.com/education-center/virginia-mileage-reimbursement-law/" target="_blank">Mileage Reimbursement</a>
+						<li><a href="https://justworks.com/blog/expenses-101-expense-reimbursements-taxable-income">General Reimbursement Tips</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-5">
+			<div class="container">
+				<div class="jumbotron">
+					<img src="./Images/Stark.jpg" style="width:100%">
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="container">
+				<div class="jumbotron">
+				<h5>Login</h5>
+					<form action="Login" method="POST">
+						Login Type: <label for="emp">Employee</label><input type="radio" id="emp" name="usertype" value="Employee" checked> | <label for="man">Manager</label><input type="radio" id="man" name="usertype" value="Manager"><br>
+						Username: <input class="form-control" type="text" name="username">
+						Password: <input class="form-control" type="password" name="userpass"><br>
+						<input type="submit" value="Login">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 </body>
 </html>

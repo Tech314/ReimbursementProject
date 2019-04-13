@@ -2,27 +2,33 @@ package stark.project.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import stark.project.dao.EmployeeDAO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import stark.project.dao.ManagerDAO;
+import stark.project.dao.RequestDAO;
+import stark.project.util.Requests;
 import stark.project.util.Users;
 
 /**
- * Servlet implementation class RegisterEmployee
+ * Servlet implementation class GetManagerHomeInfo
  */
-@WebServlet("/RegisterEmployee")
-public class RegisterEmployee extends HttpServlet {
+@WebServlet("/GetManagerHomeInfo")
+public class GetManagerHomeInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterEmployee() {
+    public GetManagerHomeInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +38,21 @@ public class RegisterEmployee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Users newUser = new Users();
+		HttpSession session = request.getSession(false);
+		Users manager = ManagerDAO.getInfo((String)session.getAttribute("user"));
 		
-		newUser.setFname(request.getParameter("fname"));
-		newUser.setLname(request.getParameter("lname"));
-		newUser.setUname(request.getParameter("uname"));
-		newUser.setEmail(request.getParameter("email"));
-		newUser.setPass(generatePassword());
+		String uName = manager.getFname() + " " + manager.getLname();
+		ArrayList<Requests> pRequests = RequestDAO.getPendingRequests();
 		
-		EmployeeDAO.insertEmployee(newUser);
+		ArrayList<String> responseArr = new ArrayList<String>();
+		responseArr.add(uName);
+		responseArr.add("" + pRequests.size());
 		
+		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
+		ObjectMapper map = new ObjectMapper();
 		
-		response.sendRedirect("Managers/EmployeeList.html");
-		out.print("Successfully added " + request.getParameter("fname"));
-		
+		out.print(map.writeValueAsString(responseArr));
 	}
 
 	/**
@@ -56,15 +61,6 @@ public class RegisterEmployee extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-	
-	private String generatePassword() {
-		String passwordset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
-		char[] password = new char[13];
-		for(int i = 0; i < 13; i++) {
-			password[i] = passwordset.charAt((int)(Math.random()*67));
-		}
-		return new String(password);
 	}
 
 }

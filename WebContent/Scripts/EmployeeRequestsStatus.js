@@ -31,7 +31,7 @@ const display = (xhr) => {
 
 		if(requestArr[i].reqStatus == "Pending"){
 			newRow.innerHTML = 
-				"<td>" + requestArr[i].empFName + " " + requestArr[i].empLName + "</td>" +
+				"<td><a href='mailto:" + requestArr[i].email + "'>" + requestArr[i].empFName + " " + requestArr[i].empLName + "</a></td>" +
 				"<td>" + requestArr[i].reqDate + "</td>" +
 				"<td>" + requestArr[i].expDate + "</td>" +
 				"<td>" + requestArr[i].reqAmt + "</td>" +
@@ -43,7 +43,7 @@ const display = (xhr) => {
 		}
 		else{
 			newRow.innerHTML = 
-				"<td>" + requestArr[i].empFName + " " + requestArr[i].empLName + "</td>" +
+				"<td><a href='mailto:" + requestArr[i].email + "'>" + requestArr[i].empFName + " " + requestArr[i].empLName + "</a></td>" +
 				"<td>" + requestArr[i].reqDate + "</td>" +
 				"<td>" + requestArr[i].expDate + "</td>" +
 				"<td>" + requestArr[i].reqAmt + "</td>" +

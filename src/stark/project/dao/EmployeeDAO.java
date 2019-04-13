@@ -94,6 +94,46 @@ public class EmployeeDAO {
 		return u;
 	}
 	
+	public static Users getInfo(int eid) {
+		Users u = new Users();
+		
+		try{  
+			getConnection(); 
+		      
+			PreparedStatement ps = null;
+			
+			ps = conn.prepareStatement("select * from Employees where employee_id=?");  
+			ps.setInt(1,eid);   
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				u.setId("" + rs.getInt("Employee_Id"));
+				u.setFname(rs.getString("fname"));
+				u.setLname(rs.getString("lname"));
+				u.setUname(rs.getString("user_name"));
+				u.setPass(rs.getString("user_pass"));
+				u.setEmail(rs.getString("email"));
+			}
+			
+		          
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		} 
+		finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return u;
+	}
+	
 	public static void insertEmployee(Users emp) {
 		try {
 			getConnection();
