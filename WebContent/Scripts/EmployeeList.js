@@ -19,7 +19,7 @@ const sendAjaxPost = (url, eid) => {
 	}
 	xhr.open("POST", url);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send("eid=" + eid);
+	xhr.send("eid=" + eid + "&usertype=Employee");
 }
 
 const sendAjaxGet = (url, func) => {

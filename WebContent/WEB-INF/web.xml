@@ -124,4 +124,8 @@
     <filter-name>ManagerFilter</filter-name>
     <filter-class>stark.project.filters.ManagerFilter</filter-class>
   </filter>
+  <error-page>
+        <error-code>418</error-code>
+        <location>/418.html</location>
+</error-page>
 </web-app>

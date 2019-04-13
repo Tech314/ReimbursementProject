@@ -41,6 +41,7 @@ public class GetAllRequests extends HttpServlet {
 		
 		ArrayList<Requests> requests = RequestDAO.getAllRequests();
 		
+		//System.out.println(map.writeValueAsString(requests));
 		out.print(map.writeValueAsString(requests));
 		
 		out.close();

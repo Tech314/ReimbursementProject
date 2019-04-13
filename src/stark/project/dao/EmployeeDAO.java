@@ -181,8 +181,8 @@ public class EmployeeDAO {
 		try {
 			getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("Update table employees"
-					+ "set user_name=? and email=? and user_pass=?"
+			PreparedStatement ps = conn.prepareStatement("Update employees "
+					+ "set user_name=?, email=?, user_pass=? "
 					+ "where employee_id=?");
 			ps.setInt(4, Integer.parseInt(emp.getId()));
 			ps.setString(1, emp.getUname());

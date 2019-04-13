@@ -3,14 +3,17 @@ package stark.project.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import stark.project.dao.EmployeeDAO;
+import stark.project.dao.ManagerDAO;
 import stark.project.util.Users;
 
 import javax.mail.*;
@@ -38,20 +41,54 @@ public class ResetPassword extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//HttpSession session = request.getSession(false);
-		Users employee = EmployeeDAO.getInfo(Integer.parseInt(request.getParameter("eid")));
+		HttpSession session = request.getSession(false);
+		Users user = null;
 		int eid = Integer.parseInt(request.getParameter("eid"));
 		PrintWriter out = response.getWriter();
-		response.setContentType("text/plain");
+		response.setContentType("text/html");
 		String newPass = generatePassword();
 		
-		if(EmployeeDAO.resetPass(eid,newPass)) {
-			out.print("Successfully reset password");
-			sendEmail(employee.getEmail(),newPass);
+		if(!session.getAttribute("userType").equals("Manager")) {
+			if(request.getParameter("usertype").equals("Employee")) {
+				user = EmployeeDAO.getInfo(eid);
+				if(EmployeeDAO.resetPass(eid,newPass)) {
+					out.print("Successfully reset password");
+					sendEmail(user.getEmail(),newPass);
+					RequestDispatcher rd = request.getRequestDispatcher("LoginPage.html");
+					rd.include(request, response);
+				}
+				else {
+					out.print("Error resetting password");
+					RequestDispatcher rd = request.getRequestDispatcher("LoginPage.html");
+					rd.include(request, response);
+				}
+			}
+			else {
+				user = ManagerDAO.getInfo(eid);
+				if(ManagerDAO.resetPass(eid,newPass)) {
+					out.print("Successfully reset password");
+					sendEmail(user.getEmail(),newPass);
+					RequestDispatcher rd = request.getRequestDispatcher("LoginPage.html");
+					rd.include(request, response);
+				}
+				else {
+					out.print("Error resetting password");
+					RequestDispatcher rd = request.getRequestDispatcher("LoginPage.html");
+					rd.include(request, response);
+				}
+			}
 		}
 		else {
-			out.print("Error resetting password");
+			user = EmployeeDAO.getInfo(eid);
+			if(EmployeeDAO.resetPass(eid,newPass)) {
+				out.print("Successfully reset password");
+				sendEmail(user.getEmail(),newPass);
+			}
+			else {
+				out.print("Error resetting password");
+			}
 		}
+		
 	}
 
 	/**

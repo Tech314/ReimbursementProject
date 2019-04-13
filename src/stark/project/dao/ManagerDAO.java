@@ -97,6 +97,46 @@ public class ManagerDAO {
 		return u;
 	}
 	
+	public static Users getInfo(int eid) {
+		Users u = new Users();
+		
+		try{  
+			getConnection(); 
+		      
+			PreparedStatement ps = null;
+			
+			ps = conn.prepareStatement("select * from Managers where manager_id=?");  
+			ps.setInt(1,eid);   
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				u.setId("" + rs.getInt("Manager_ID"));
+				u.setFname(rs.getString("fname"));
+				u.setLname(rs.getString("lname"));
+				u.setUname(rs.getString("user_name"));
+				u.setPass(rs.getString("user_pass"));
+				u.setEmail(rs.getString("email"));
+			}
+			
+		          
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		} 
+		finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return u;
+	}
+	
 	public static void editManInf(Users emp) {
 		try {
 			getConnection();
@@ -122,5 +162,32 @@ public class ManagerDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static boolean resetPass(int eid, String newPass) {
+		boolean reset = false;
+		getConnection();
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("update managers set user_pass=? where manager_id=?");
+			ps.setString(1, newPass);
+			ps.setInt(2, eid);
+			
+			if(ps.executeUpdate() != 0) {
+				reset = true;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return reset;
 	}
 }

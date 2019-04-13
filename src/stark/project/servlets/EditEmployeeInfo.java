@@ -53,7 +53,7 @@ public class EditEmployeeInfo extends HttpServlet {
 				&& !request.getParameter("newPass").equals("")
 				&& !request.getParameter("newPass2").equals("")){
 			out.print("New passwords don't match");
-			RequestDispatcher rd = request.getRequestDispatcher("/Employees/EmployeeInfoEdit.html");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("./Employees/EmployeeInfoEdit.html");
 			rd.include(request, response);
 		}
 		
@@ -64,12 +64,12 @@ public class EditEmployeeInfo extends HttpServlet {
 		if(request.getParameter("oldPass").equals(user.getPass())) {
 			EmployeeDAO.editEmpInf(user);
 			out.print("Info updated successfully");
-			RequestDispatcher rd = request.getRequestDispatcher("/Employees/EmployeeInfoEdit.html");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("./Employees/EmployeeInfoEdit.html");
 			rd.include(request, response);
 		}
 		if(!request.getParameter("oldPass").equals(user.getPass())) {
 			out.print("Old password does not match existing password");
-			RequestDispatcher rd = request.getRequestDispatcher("/Employees/EmployeeInfoEdit.html");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("./Employees/EmployeeInfoEdit.html");
 			rd.include(request, response);
 		}
 		
