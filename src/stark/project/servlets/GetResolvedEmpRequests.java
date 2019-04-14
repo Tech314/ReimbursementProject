@@ -2,6 +2,8 @@ package stark.project.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -41,6 +43,9 @@ public class GetResolvedEmpRequests extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		Users user = EmployeeDAO.getInfo((String)session.getAttribute("user"));
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.FLOOR);
+		df.setMinimumFractionDigits(2);
 		
 		ArrayList<Requests> requests = RequestDAO.getResolvedRequests(Integer.parseInt(user.getId()));
 		
@@ -49,7 +54,7 @@ public class GetResolvedEmpRequests extends HttpServlet {
 				out.println("<tr>" +
 					"<td>" + req.getReqDate() + "</td>" +
 					"<td>" + req.getExpDate() + "</td>" +
-					"<td>" + req.getReqAmt() + "</td>" +
+					"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 					"<td>" + req.getReqDesc() + "</td>" + 
 					"<td>" + req.getReqStatus() + "</td>" +
 					"<td>" + "" + "</td>" +
@@ -59,7 +64,7 @@ public class GetResolvedEmpRequests extends HttpServlet {
 				out.println("<tr>" +
 						"<td>" + req.getReqDate() + "</td>" +
 						"<td>" + req.getExpDate() + "</td>" +
-						"<td>" + req.getReqAmt() + "</td>" +
+						"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 						"<td>" + req.getReqDesc() + "</td>" + 
 						"<td>" + req.getReqStatus() + "</td>" +
 						"<td>" + req.getReqDecision() + "</td>" +

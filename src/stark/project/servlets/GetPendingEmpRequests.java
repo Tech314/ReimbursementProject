@@ -2,6 +2,8 @@ package stark.project.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -44,12 +46,15 @@ public class GetPendingEmpRequests extends HttpServlet {
 		
 		ArrayList<Requests> requests = RequestDAO.getPendingRequests(Integer.parseInt(user.getId()));
 		
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setMinimumFractionDigits(2);
+		df.setRoundingMode(RoundingMode.FLOOR);
 		for(Requests req: requests) {
 			if(req.getReqStatus().equals("Pending")) {
 				out.println("<tr>" +
 					"<td>" + req.getReqDate() + "</td>" +
 					"<td>" + req.getExpDate() + "</td>" +
-					"<td>" + req.getReqAmt() + "</td>" +
+					"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 					"<td>" + req.getReqDesc() + "</td>" + 
 					"<td>" + req.getReqStatus() + "</td>" +
 					"<td>" + "" + "</td>" +
@@ -59,7 +64,7 @@ public class GetPendingEmpRequests extends HttpServlet {
 				out.println("<tr>" +
 						"<td>" + req.getReqDate() + "</td>" +
 						"<td>" + req.getExpDate() + "</td>" +
-						"<td>" + req.getReqAmt() + "</td>" +
+						"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 						"<td>" + req.getReqDesc() + "</td>" + 
 						"<td>" + req.getReqStatus() + "</td>" +
 						"<td>" + req.getReqDecision() + "</td>" +

@@ -2,6 +2,8 @@ package stark.project.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -38,13 +40,16 @@ public class GetResolvedRequests extends HttpServlet {
 		
 		ArrayList<Requests> requests = RequestDAO.getResolvedRequests();
 		
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.FLOOR);
+		df.setMinimumFractionDigits(2);
 		for(Requests req: requests) {
 			if(req.getReqStatus().equals("Pending")) {
 				out.println("<tr>" +
 					"<td>" + req.getEmpFName() + " " + req.getEmpLName() + "</td>" +
 					"<td>" + req.getReqDate() + "</td>" +
 					"<td>" + req.getExpDate() + "</td>" +
-					"<td>" + req.getReqAmt() + "</td>" +
+					"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 					"<td>" + req.getReqDesc() + "</td>" + 
 					"<td>" + ""/*requestArr[i].exp.Receipt*/ + "</td>" +
 					"<td>" + req.getReqStatus() + "</td>" +
@@ -56,7 +61,7 @@ public class GetResolvedRequests extends HttpServlet {
 						"<td>" + req.getEmpFName() + " " + req.getEmpLName() + "</td>" +
 						"<td>" + req.getReqDate() + "</td>" +
 						"<td>" + req.getExpDate() + "</td>" +
-						"<td>" + req.getReqAmt() + "</td>" +
+						"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 						"<td>" + req.getReqDesc() + "</td>" + 
 						"<td>" + ""/*requestArr[i].exp.Receipt*/ + "</td>" +
 						"<td>" + req.getReqStatus() + "</td>" +

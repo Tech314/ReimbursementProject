@@ -1,6 +1,7 @@
 package stark.project.dao;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -496,5 +497,33 @@ public class RequestDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static Blob getReceipt(int reqId) {
+		getConnection();
+		Blob pic = null;
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("select receipt_photo from requests where request_id=?");
+			ps.setInt(1, reqId);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				pic = rs.getBlob(1);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return pic;
 	}
 }
