@@ -509,7 +509,7 @@ public class RequestDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				pic = rs.getBlob(1);
+				pic = rs.getBlob("receipt_photo");
 			}
 		}
 		catch(SQLException e) {

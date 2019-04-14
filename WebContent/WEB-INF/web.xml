@@ -114,6 +114,11 @@
     <servlet-name>GetEmployeeHomeInfo</servlet-name>
     <servlet-class>stark.project.servlets.GetEmployeeHomeInfo</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>GetReceipt</servlet-name>
+    <servlet-class>stark.project.servlets.GetReceipt</servlet-class>
+  </servlet>
   <filter>
     <display-name>EmployeeFilter</display-name>
     <filter-name>EmployeeFilter</filter-name>
@@ -125,7 +130,7 @@
     <filter-class>stark.project.filters.ManagerFilter</filter-class>
   </filter>
   <error-page>
-        <error-code>418</error-code>
-        <location>/418.html</location>
-</error-page>
+    <error-code>418</error-code>
+    <location>/418.html</location>
+  </error-page>
 </web-app>

@@ -55,7 +55,7 @@ public class GetAllRequests extends HttpServlet {
 					"<td>" + req.getExpDate() + "</td>" +
 					"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 					"<td>" + req.getReqDesc() + "</td>" + 
-					"<td>" + ""/*requestArr[i].exp.Receipt*/ + "</td>" +
+					"<td><a href=GetReceipt?rid=" + req.getReqId() + " target='_top'><img width='100' height='100' src=GetReceipt?rid=" + req.getReqId() + "></a></td>" +
 					"<td>" + req.getReqStatus() + "</td>" +
 					"<td>" + "<select onchange='resolveReq(this.value," + req.getReqId() + "," + req.getEmpId() + ")'><option>--Resolve--</option><option value='Approve'>Approve</option><option value='Reject'>Reject</option></select>" + "</td>" +
 					"<td>" + "" + "</td></tr>");
@@ -67,7 +67,7 @@ public class GetAllRequests extends HttpServlet {
 						"<td>" + req.getExpDate() + "</td>" +
 						"<td>$" + df.format(req.getReqAmt()) + "</td>" +
 						"<td>" + req.getReqDesc() + "</td>" + 
-						"<td>" + ""/*requestArr[i].exp.Receipt*/ + "</td>" +
+						"<td><a href=GetReceipt?rid=" + req.getReqId() + " target='_top'><img width='100' height='100' src=GetReceipt?rid=" + req.getReqId() + "></a></td>" +
 						"<td>" + req.getReqStatus() + "</td>" +
 						"<td>" + req.getReqDecision() + "</td>" +
 						"<td>" + req.getManFName() + " " + req.getManLName() + "</td></tr>");
