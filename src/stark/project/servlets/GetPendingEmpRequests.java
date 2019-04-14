@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import stark.project.dao.EmployeeDAO;
 import stark.project.dao.RequestDAO;
 import stark.project.util.Requests;
@@ -38,16 +36,36 @@ public class GetPendingEmpRequests extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("application/json");
+		response.setContentType("text/html");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
-		ObjectMapper map = new ObjectMapper();
 		
 		Users user = EmployeeDAO.getInfo((String)session.getAttribute("user"));
 		
 		ArrayList<Requests> requests = RequestDAO.getPendingRequests(Integer.parseInt(user.getId()));
 		
-		out.print(map.writeValueAsString(requests));
+		for(Requests req: requests) {
+			if(req.getReqStatus().equals("Pending")) {
+				out.println("<tr>" +
+					"<td>" + req.getReqDate() + "</td>" +
+					"<td>" + req.getExpDate() + "</td>" +
+					"<td>" + req.getReqAmt() + "</td>" +
+					"<td>" + req.getReqDesc() + "</td>" + 
+					"<td>" + req.getReqStatus() + "</td>" +
+					"<td>" + "" + "</td>" +
+					"<td>" + "" + "</td></tr>");
+			}
+			else {
+				out.println("<tr>" +
+						"<td>" + req.getReqDate() + "</td>" +
+						"<td>" + req.getExpDate() + "</td>" +
+						"<td>" + req.getReqAmt() + "</td>" +
+						"<td>" + req.getReqDesc() + "</td>" + 
+						"<td>" + req.getReqStatus() + "</td>" +
+						"<td>" + req.getReqDecision() + "</td>" +
+						"<td>" + req.getManFName() + " " + req.getManLName() + "</td></tr>");
+			}
+		}
 		
 		out.close();
 	}

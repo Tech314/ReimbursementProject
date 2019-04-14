@@ -20,26 +20,14 @@ const sendAjaxGet = (url, func) => {
 }
 
 const display = (xhr) => {
-	requestArr = JSON.parse(xhr.responseText);
+	tableRows = xhr.responseText;
 	let table = document.getElementById("reqTable");
 	table.removeChild(document.getElementById("reqTableBody"));
 	let newBody = document.createElement("tbody");
 	newBody.setAttribute("id", "reqTableBody");
+	newBody.innerHTML = tableRows;
 	table.appendChild(newBody);
-	for (i in requestArr) {
-		let newRow = document.createElement("tr");
-		
-		newRow.innerHTML = 
-			"<td>" + requestArr[i].reqDate + "</td>" +
-			"<td>" + requestArr[i].expDate + "</td>" + 
-			"<td>" + requestArr[i].reqAmt + "</td>" +
-			"<td>" + requestArr[i].reqDesc + "</td>" + 
-			"<td>" + requestArr[i].reqStatus + "</td>" +
-			"<td>" + requestArr[i].reqDecision + "</td>";
-			
-		newBody.appendChild(newRow);
-		
-	}
+	
 }
 
 const ShowAll = () => {
