@@ -20,43 +20,15 @@ const sendAjaxGet = (url, func) => {
 }
 
 const display = (xhr) => {
-	requestArr = JSON.parse(xhr.responseText);
+	tableRows = xhr.responseText;
 	let table = document.getElementById("reqTable");
 	table.removeChild(document.getElementById("reqTableBody"));
 	let newBody = document.createElement("tbody");
 	newBody.setAttribute("id", "reqTableBody");
+	newBody.innerHTML = tableRows;
 	table.appendChild(newBody);
-	for (i in requestArr) {
-		let newRow = document.createElement("tr");
-
-		if(requestArr[i].reqStatus == "Pending"){
-			newRow.innerHTML = 
-				"<td><a href='mailto:" + requestArr[i].email + "'>" + requestArr[i].empFName + " " + requestArr[i].empLName + "</a></td>" +
-				"<td>" + requestArr[i].reqDate + "</td>" +
-				"<td>" + requestArr[i].expDate + "</td>" +
-				"<td>" + requestArr[i].reqAmt + "</td>" +
-				"<td>" + requestArr[i].reqDesc + "</td>" + 
-				"<td>" + ""/*requestArr[i].exp.Receipt*/ + "</td>" +
-				"<td>" + requestArr[i].reqStatus + "</td>" +
-				"<td>" + "<select onchange='resolveReq(this.value," + requestArr[i].reqId + "," + requestArr[i].empId + ")'><option>--Resolve--</option><option value='Approve'>Approve</option><option value='Reject'>Reject</option></select>" + "</td>" +
-				"<td>" + "" + "</td>";
-		}
-		else{
-			newRow.innerHTML = 
-				"<td><a href='mailto:" + requestArr[i].email + "'>" + requestArr[i].empFName + " " + requestArr[i].empLName + "</a></td>" +
-				"<td>" + requestArr[i].reqDate + "</td>" +
-				"<td>" + requestArr[i].expDate + "</td>" +
-				"<td>" + requestArr[i].reqAmt + "</td>" +
-				"<td>" + requestArr[i].reqDesc + "</td>" + 
-				"<td>" + ""/*requestArr[i].exp.Receipt*/ + "</td>" +
-				"<td>" + requestArr[i].reqStatus + "</td>" +
-				"<td>" + requestArr[i].reqDecision + "</td>" +
-				"<td>" + requestArr[i].manFName + " " + requestArr[i].manLName + "</td>";
-		}
-		newBody.appendChild(newRow);
 		
 	//console.log(requestArr);
-	}
 }
 
 const ShowAll = () => {
