@@ -1,19 +1,34 @@
 package stark.project.dao;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import stark.project.util.Users;
 
 public class EmployeeDAO {
 	
 	private static Connection conn = null;
+	private static final Properties props = getJdbcProperties();
+	
+	private static Properties getJdbcProperties() {
+		Properties props = new Properties();
+		try {
+			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e);
+		}
+		return props;
+	}
 	
 	private static void getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String dbURL = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(dbURL,"Tech314","oracle");
+			conn = DriverManager.getConnection(props.getProperty("jdbc.url"),
+												props.getProperty("jdbc.username"),
+												props.getProperty("jdbc.password"));
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

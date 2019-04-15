@@ -1,7 +1,7 @@
 package stark.project.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,12 +30,9 @@ public class Welcome extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");  
-	    PrintWriter out = response.getWriter();  
-	    
-	    String n=request.getParameter("username");  
-	    out.print("Welcome "+n);  
-	          
-	    out.close();
+	   
+		response.setStatus(418);
+		response.sendRedirect("418.html");
 	}
 
 	/**

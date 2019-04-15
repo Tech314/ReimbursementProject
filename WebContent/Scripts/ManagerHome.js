@@ -13,6 +13,9 @@ const sendAjaxGet = (url, func) => {
 		if (this.readyState==4 && this.status==200) {
 			func(this);
 		}
+		else if(this.status==418){
+			window.location.href = "../418.html";
+		}
 	}
 	xhr.open("GET", url);
 	xhr.send();
@@ -30,5 +33,13 @@ const display = (xhr) => {
 						"additional information.";
 }
 
+let coffee = document.getElementById("coffee");
 
+coffee.addEventListener("click",function(e){
+	sendAjaxGet("../Welcome",coffeeFunc);
+});
+
+const coffeeFunc = (xhr) => {
+	window.location.href = "./418.html";
+}
 
