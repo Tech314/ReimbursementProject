@@ -119,6 +119,11 @@
     <servlet-name>GetReceipt</servlet-name>
     <servlet-class>stark.project.servlets.GetReceipt</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>EditInfoLanding</servlet-name>
+    <servlet-class>stark.project.servlets.EditInfoLanding</servlet-class>
+  </servlet>
   <filter>
     <display-name>EmployeeFilter</display-name>
     <filter-name>EmployeeFilter</filter-name>

@@ -23,7 +23,7 @@ public class EmployeeDAO {
 		return props;
 	}
 	
-	private static void getConnection() {
+	private static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(props.getProperty("jdbc.url"),
@@ -36,6 +36,7 @@ public class EmployeeDAO {
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return conn;
 	}
 	
 	public static boolean validate(String name,String pass) {
@@ -149,7 +150,8 @@ public class EmployeeDAO {
 		return u;
 	}
 	
-	public static void insertEmployee(Users emp) {
+	public static long insertEmployee(Users emp) {
+		long records = 0;
 		try {
 			getConnection();
 			
@@ -177,7 +179,7 @@ public class EmployeeDAO {
 			ps.setString(5, emp.getPass());
 			ps.setString(6, emp.getEmail());
 			
-			ps.executeUpdate();
+			records = ps.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -190,9 +192,12 @@ public class EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
+		
+		return records;
 	}
 	
-	public static void editEmpInf(Users emp) {
+	public static long editEmpInf(Users emp) {
+		long records = 0;
 		try {
 			getConnection();
 			
@@ -204,7 +209,7 @@ public class EmployeeDAO {
 			ps.setString(3, emp.getPass());
 			ps.setString(2, emp.getEmail());
 			
-			ps.executeUpdate();
+			records = ps.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -217,6 +222,8 @@ public class EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
+		
+		return records;
 	}
 	
 	public static ArrayList<Users> getEmployeeList(){

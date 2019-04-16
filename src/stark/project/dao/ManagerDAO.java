@@ -155,8 +155,8 @@ public class ManagerDAO {
 		try {
 			getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("Update table managers"
-					+ "set user_name=? and email=? and user_pass=?"
+			PreparedStatement ps = conn.prepareStatement("Update managers "
+					+ "set user_name=?, email=?, user_pass=?"
 					+ "where manager_id=?");
 			ps.setInt(4, Integer.parseInt(emp.getId()));
 			ps.setString(1, emp.getUname());

@@ -3,6 +3,7 @@ package stark.project.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +36,7 @@ public class EditManagerInfo extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(false);
 		String uname = null;
-		response.setContentType("text/plain");  
+		response.setContentType("text/html");  
 	    PrintWriter out = response.getWriter(); 
 		
 		if(session != null) {
@@ -46,28 +47,46 @@ public class EditManagerInfo extends HttpServlet {
 		
 		if(request.getParameter("newPass").equals(request.getParameter("newPass2")) 
 				&& !request.getParameter("newPass").equals("")) {
-			user.setPass(request.getParameter("newPass"));
+			if(request.getParameter("oldPass").equals(user.getPass())) {
+				user.setPass(request.getParameter("newPass"));
+				ManagerDAO.editManInf(user);
+			//	out.print("Info updated successfully");
+				request.setAttribute("success", true);
+				RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
+				rd.include(request, response);
+			}
+			else {
+				request.setAttribute("success", false);
+				RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
+				rd.include(request, response);
+			}
 		}
-		else if(!request.getParameter("newPass").equals(request.getParameter("newPass2")) 
+		if(!request.getParameter("newPass").equals(request.getParameter("newPass2")) 
 				&& !request.getParameter("newPass").equals("")
 				&& !request.getParameter("newPass2").equals("")){
-			out.print("New passwords don't match");
-			response.sendRedirect("Managers/ManagerInfoEdit.html");  
+		//	out.print("New passwords don't match");
+			request.setAttribute("success", false);
+			RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
+			rd.include(request, response); 
 		}
 		
-		if(!request.getParameter("newEmail").equals("")) {
+		/*if(!request.getParameter("newEmail").equals("")) {
 			user.setEmail(request.getParameter("newEmail"));
 		}
 		
 		if(request.getParameter("oldPass").equals(user.getPass())) {
 			ManagerDAO.editManInf(user);
-			out.print("Info updated successfully");
-			response.sendRedirect("Managers/ManagerInfo.html");  
+		//	out.print("Info updated successfully");
+			request.setAttribute("success", true);
+			RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
+			rd.include(request, response);
 		}
-		else {
-			out.print("Old password does not match existing password");
-			response.sendRedirect("Managers/ManagerInfoEdit.html");  
-		}
+		if(!request.getParameter("oldPass").equals(user.getPass())) {
+		//	out.print("Old password does not match existing password");
+			request.setAttribute("success", false);
+			RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
+			rd.include(request, response);
+		} */
 		
 		out.close();
 	}

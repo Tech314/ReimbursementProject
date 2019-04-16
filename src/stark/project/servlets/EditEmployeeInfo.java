@@ -48,30 +48,47 @@ public class EditEmployeeInfo extends HttpServlet {
 		if(request.getParameter("newPass").equals(request.getParameter("newPass2")) 
 				&& !request.getParameter("newPass").equals("")) {
 			user.setPass(request.getParameter("newPass"));
+			if(request.getParameter("oldPass").equals(user.getPass())) {
+				EmployeeDAO.editEmpInf(user);
+				out.print("Info updated successfully");
+				request.setAttribute("success", true);
+				RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
+				rd.include(request, response);
+			}
+			else {
+				out.print("Old password does not match existing password");
+				request.setAttribute("success", false);
+				RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
+				rd.include(request, response);
+			}
 		}
+		
 		if(!request.getParameter("newPass").equals(request.getParameter("newPass2")) 
 				&& !request.getParameter("newPass").equals("")
 				&& !request.getParameter("newPass2").equals("")){
 			out.print("New passwords don't match");
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("./Employees/EmployeeInfoEdit.html");
+			request.setAttribute("success", false);
+			RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
 			rd.include(request, response);
 		}
 		
-		if(!request.getParameter("newEmail").equals("")) {
+		/*if(!request.getParameter("newEmail").equals("")) {
 			user.setEmail(request.getParameter("newEmail"));
 		}
 		
 		if(request.getParameter("oldPass").equals(user.getPass())) {
 			EmployeeDAO.editEmpInf(user);
 			out.print("Info updated successfully");
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("./Employees/EmployeeInfoEdit.html");
+			request.setAttribute("success", true);
+			RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
 			rd.include(request, response);
 		}
 		if(!request.getParameter("oldPass").equals(user.getPass())) {
 			out.print("Old password does not match existing password");
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("./Employees/EmployeeInfoEdit.html");
+			request.setAttribute("success", false);
+			RequestDispatcher rd = request.getRequestDispatcher("EditInfoLanding");
 			rd.include(request, response);
-		}
+		}*/
 		
 		out.close();
 	}

@@ -58,10 +58,10 @@ const validateEmail = (mail) => {
 
 const checkButtonDisabled = () => {
 	if(emailCheck && uNameCheck){
-		document.getElementById("submit").removeAttribute("disabled");
+		document.getElementById("submit").removeAttribute("disabled","");
 	}
 	else{
-		document.getElementById("submit").setAttribute("disabled");
+		document.getElementById("submit").setAttribute("disabled","");
 	}
 }
 
