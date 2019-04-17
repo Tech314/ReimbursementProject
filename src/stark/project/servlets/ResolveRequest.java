@@ -30,6 +30,7 @@ import stark.project.util.Users;
 @WebServlet("/ResolveRequest")
 public class ResolveRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Properties prop = getProperties();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -106,7 +107,7 @@ public class ResolveRequest extends HttpServlet {
 	    //  Session session = Session.getInstance(props);
 	      Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 	    	  protected PasswordAuthentication getPasswordAuthentication() {
-	    		  return new PasswordAuthentication("noreplystarkstarkstark@yahoo.com","oracle123");
+	    		  return new PasswordAuthentication(prop.getProperty("email.address"),prop.getProperty("email.password"));
 	    	  }
 	      });
 	      return session;
@@ -115,11 +116,22 @@ public class ResolveRequest extends HttpServlet {
 	private static MimeMessage prepareEmailMessage(MimeMessage message, String to, String title, String html)
 	          throws MessagingException {
 	      message.setContent(html, "text/html; charset=utf-8");
-	      message.setFrom(new InternetAddress("noreplystarkstarkstark@yahoo.com"));
+	      message.setFrom(new InternetAddress(prop.getProperty("email.address")));
 	      message.setRecipients(Message.RecipientType.TO, to);
 	      message.setSubject(title);
 	      
 	      return message;
+	}
+	
+	private static Properties getProperties() {
+		Properties props = new Properties();
+		try {
+			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e);
+		}
+		return props;
 	}
 
 }

@@ -53,7 +53,7 @@ public class RequestDAO {
 		
 		try {
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from requests");
+			ResultSet rs = st.executeQuery("select * from requests order by request_id desc");
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
@@ -109,7 +109,7 @@ public class RequestDAO {
 		getConnection();
 		
 		try {
-			PreparedStatement st = conn.prepareStatement("select * from requests where request_id=?");
+			PreparedStatement st = conn.prepareStatement("select * from requests where request_id=? order by request_id desc");
 			st.setInt(1, reqId);
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
@@ -164,7 +164,7 @@ public class RequestDAO {
 		getConnection();
 		
 		try {
-			PreparedStatement st = conn.prepareStatement("select * from requests where request_status='Pending'");
+			PreparedStatement st = conn.prepareStatement("select * from requests where request_status='Pending' order by request_id desc");
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
 			ResultSet man = null;
@@ -222,7 +222,7 @@ public class RequestDAO {
 		
 		try {
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from requests where request_status='Resolved'");
+			ResultSet rs = st.executeQuery("select * from requests where request_status='Resolved' order by request_id desc");
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
