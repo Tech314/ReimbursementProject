@@ -57,7 +57,7 @@ public class GetAllRequests extends HttpServlet {
 					"<td>" + req.getReqDesc() + "</td>" + 
 					"<td><a href=GetReceipt?rid=" + req.getReqId() + " target='_top'><img width='100' height='100' src=GetReceipt?rid=" + req.getReqId() + "></a></td>" +
 					"<td>" + req.getReqStatus() + "</td>" +
-					"<td>" + "<select onchange='resolveReq(this.value," + req.getReqId() + "," + req.getEmpId() + ")'><option>--Resolve--</option><option value='Approve'>Approve</option><option value='Reject'>Reject</option></select>" + "</td>" +
+					"<td>" + "<select onchange='resolveReq(this.value," + req.getReqId() + ",view)'><option>--Resolve--</option><option value='Approve'>Approve</option><option value='Reject'>Reject</option></select>" + "</td>" +
 					"<td>" + "" + "</td></tr>");
 			}
 			else {

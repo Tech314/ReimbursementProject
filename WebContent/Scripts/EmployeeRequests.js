@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 })
 
 let url = "../GetAllEmpRequests";
-let view = "ShowAll";
 
 const createOnStartUp = () => {
 	sendAjaxGet(url, display);
@@ -50,15 +49,12 @@ const changeView = (value) => {
 	switch(value){
 	case "ShowAll":
 		ShowAll();
-		view="ShowAll";
 		break;
 	case "ShowPending":
 		ShowPending();
-		view="ShowPending";
 		break;
 	case "ShowResolved":
 		ShowResolved();
-		view="ShowResolved";
 		break;
 	default:
 		alert("Unable to show requests");

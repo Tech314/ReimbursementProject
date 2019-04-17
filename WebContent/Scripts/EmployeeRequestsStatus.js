@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 })
 
 let url = "../GetAllRequests";
+let view = "ShowAll";
 
 const createOnStartUp = () => {
 	sendAjaxGet(url, display);
@@ -19,11 +20,11 @@ const sendAjaxGet = (url, func) => {
 	xhr.send();
 }
 
-const sendAjaxPost = (url,decision,reqId,empId) => {
+const sendAjaxPost = (url,decision,reqId,view) => {
 	let xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
 	xhr.onreadystatechange = function() {
 		if (this.readyState==4 && this.status==200) {
-			changeView(empId)
+			changeView(view)
 		}
 	}
 	xhr.open("POST", url);
@@ -62,12 +63,15 @@ const ShowResolved = () => {
 const changeView = (value) => {
 	switch(value){
 	case "ShowAll":
+		view="ShowAll";
 		ShowAll();
 		break;
 	case "ShowPending":
+		view="ShowPending";
 		ShowPending();
 		break;
 	case "ShowResolved":
+		view="ShowResolved";
 		ShowResolved();
 		break;
 	default:
