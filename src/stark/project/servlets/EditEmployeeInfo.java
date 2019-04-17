@@ -47,8 +47,8 @@ public class EditEmployeeInfo extends HttpServlet {
 		
 		if(request.getParameter("newPass").equals(request.getParameter("newPass2")) 
 				&& !request.getParameter("newPass").equals("")) {
-			user.setPass(request.getParameter("newPass"));
 			if(request.getParameter("oldPass").equals(user.getPass())) {
+				user.setPass(request.getParameter("newPass"));
 				EmployeeDAO.editEmpInf(user);
 				out.print("Info updated successfully");
 				request.setAttribute("success", true);
