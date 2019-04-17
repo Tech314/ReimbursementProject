@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
   createOnStartUp();
 })
 
-
 const createOnStartUp = () => {
 	let url = "../GetEmployeeList"
 	sendAjaxGet(url, displayOptions);

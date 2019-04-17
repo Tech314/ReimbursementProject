@@ -19,6 +19,19 @@ const sendAjaxGet = (url, func) => {
 	xhr.send();
 }
 
+const sendAjaxPost = (url,decision,reqId,empId) => {
+	let xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.HTTPRequest");
+	xhr.onreadystatechange = function() {
+		if (this.readyState==4 && this.status==200) {
+			changeView(empId)
+		}
+	}
+	xhr.open("POST", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	let sendString = "decision=" + decision + "&reqId=" + reqId;
+	xhr.send(sendString);
+}
+
 const display = (xhr) => {
 	tableRows = xhr.responseText;
 	let table = document.getElementById("reqTable");
@@ -60,4 +73,10 @@ const changeView = (value) => {
 	default:
 		alert("Unable to show requests");
 	}
+}
+
+const resolveReq = (decision,reqId,empId) => {
+	let url = "../ResolveRequest";
+	sendAjaxPost(url,decision,reqId,empId);
+	
 }
