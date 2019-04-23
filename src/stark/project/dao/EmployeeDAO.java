@@ -3,6 +3,7 @@ package stark.project.dao;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import stark.project.util.Users;
@@ -226,8 +227,8 @@ public class EmployeeDAO {
 		return records;
 	}
 	
-	public static ArrayList<Users> getEmployeeList(){
-		ArrayList<Users> users = new ArrayList<Users>();
+	public static List<Users> getEmployeeList(){
+		List<Users> users = new ArrayList<Users>();
 		getConnection();
 		
 		try{ 

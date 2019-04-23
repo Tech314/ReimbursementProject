@@ -2,7 +2,8 @@ package stark.project.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +40,7 @@ public class GetEmployeeList extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		ObjectMapper map = new ObjectMapper();
 		
-		ArrayList<Users> users = EmployeeDAO.getEmployeeList();
+		List<Users> users = EmployeeDAO.getEmployeeList();
 		
 		out.print(map.writeValueAsString(users));
 		
