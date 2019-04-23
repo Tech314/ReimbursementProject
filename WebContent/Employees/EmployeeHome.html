@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee Home</title>
+	<link rel="stylesheet" type="text/css" href="../CSS/bootstrap.css">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="EmployeeHome.html">Stark, Stark, and Stark</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+			<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="EmployeeHome.html">Employee Home</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">My Information</a>
+					<div class="dropdown-menu navbar-dark bg-light">
+						<a class="dropdown-item" href="EmployeeInfo.html" target="_self">View My Information</a>
+						<a class="dropdown-item" href="EmployeeInfoEdit.html" target="_self">Edit My Information</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Requests</a>
+					<div class="dropdown-menu navbar-dark bg-light">
+						<a class="dropdown-item" href="EmployeeRequests.html" target="_self">View My Requests</a>
+						<a class="dropdown-item" href="EmployeeFileRequest.html" target="_self">Make a Request</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<form action="../Logout" method="POST">
+						<input class="btn btn-danger" type="submit" value="Logout">
+					</form>
+				</li> 
+			</ul>
+		</div> 
+	</nav>
+	
+	<h2 id="welcomeText"></h2>
+	
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="container">
+				<div class="jumbotron">
+					<h5>Your reimbursement portal</h5>
+					What you can do from here:
+					<ul>
+						<li><a href="EmployeeInfo.html" target="_self">View</a>/<a href="EmployeeInfoEdit.html" target="_self">Edit</a> your information</li>
+						<li><a href="EmployeeFileRequest.html" target="_self">Submit a reimbursement request</a>
+						<li><a href="EmployeeRequests.html" target="_self">View your reimbursement requests</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="container">
+				<div class="jumbotron">
+					<img src="../Images/Logo.png" style="width:100%">
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="container">
+				<div class="jumbotron">
+					<h5>Reimbursement Requests</h5>
+					<p id="reimbursementText"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="../Scripts/EmployeeHome.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

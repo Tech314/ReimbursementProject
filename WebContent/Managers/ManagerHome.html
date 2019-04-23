@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>My Homepage</title>
+	<link rel="stylesheet" type="text/css" href="../CSS/bootstrap.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="ManagerHome.html">Stark, Stark, and Stark</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+			<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="ManagerHome.html">Manager Home</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">My Information</a>
+					<div class="dropdown-menu navbar-dark bg-light">
+						<a class="dropdown-item" href="ManagerInfo.html" target="_self">View My Information</a>
+						<a class="dropdown-item" href="ManagerInfoEdit.html" target="_self">Edit My Information</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Employees</a>
+					<div class="dropdown-menu navbar-dark bg-light">
+						<a class="dropdown-item" href="EmployeeList.html" target="_self">View All Employees</a>
+						<a class="dropdown-item" href="RegisterEmployee.html" target="_self">Register An Employee</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Requests</a>
+					<div class="dropdown-menu navbar-dark bg-light">
+						<a class="dropdown-item" href="EmployeeRequests.html" target="_self">View Requests By Employee</a>
+						<a class="dropdown-item" href="EmployeeRequestsStatus.html" target="_self">View Requests By Status</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<form action="../Logout" method="POST">
+						<input class="btn btn-danger" type="submit" value="Logout">
+					</form>
+				</li> 
+			</ul>
+		</div> 
+	</nav>
+	
+	<h2 id="welcomeText"></h2>
+	
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="container">
+				<div class="jumbotron">
+					<h5>Your reimbursement portal</h5>
+					What you can do from here:
+					<ul>
+						<li><a href="ManagerInfo.html" target="_self">View</a>/<a href="ManagerInfoEdit.html" target="_self">Edit</a> your information</li>
+						<li><a href="EmployeeList.html" target="_self">View all employees</a></li>
+						<li><a href="RegisterEmployee.html" target="_self">Register a new employee</a></li>
+						<li><a href="EmployeeRequestsStatus.html" target="_self">View/Resolve employee reimbursement requests</a></li>
+					</ul>
+				</div>
+			</div>
+			<br><br><br><br>
+			<div class="container">
+				<div class="jumbotron">
+					<h6>Coffee?</h6>
+					<img height="190" width="175" src="../Images/coffeepot.jpg" id="coffee">
+				</div>
+			</div>"
+		</div>
+		<div class="col-lg-4">
+			<div class="container">
+				<div class="jumbotron">
+					<img src="../Images/Logo.png" style="width:100%">
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="container">
+				<div class="jumbotron">
+					<h5>Reimbursement Requests</h5>
+					<p id="reimbursementText"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="../Scripts/ManagerHome.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
