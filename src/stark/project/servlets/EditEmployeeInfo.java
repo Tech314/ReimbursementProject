@@ -17,7 +17,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class EditEmployeeInfo
  */
-@WebServlet("/EditEmployeeInfo")
+@WebServlet(name="EditEmployeeInfo", urlPatterns="/EditEmployeeInfo")
 public class EditEmployeeInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

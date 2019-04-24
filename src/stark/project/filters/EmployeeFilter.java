@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class EmployeeFilter
  */
-@WebFilter("/Employees/*")
+@WebFilter(filterName="EmployeeFilter", urlPatterns="/Employees/*")
 public class EmployeeFilter implements Filter {
 
 	@SuppressWarnings("unused")

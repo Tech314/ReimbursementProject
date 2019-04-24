@@ -21,7 +21,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class GetPendingEmpRequests
  */
-@WebServlet("/GetPendingEmpRequests")
+@WebServlet(name="GetPendingEmpRequests", urlPatterns="/GetPendingEmpRequests")
 public class GetPendingEmpRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

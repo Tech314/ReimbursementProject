@@ -17,7 +17,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class EditManagerInfo
  */
-@WebServlet("/EditManagerInfo")
+@WebServlet(name="EditManagerInfo", urlPatterns="/EditManagerInfo")
 public class EditManagerInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

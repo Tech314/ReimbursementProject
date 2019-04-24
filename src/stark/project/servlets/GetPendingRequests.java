@@ -20,7 +20,7 @@ import stark.project.util.Requests;
 /**
  * Servlet implementation class GetPendingRequests
  */
-@WebServlet("/GetPendingRequests")
+@WebServlet(name="GetPendingRequests", urlPatterns="/GetPendingRequests")
 public class GetPendingRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

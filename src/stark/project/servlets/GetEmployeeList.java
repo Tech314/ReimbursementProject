@@ -19,7 +19,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class GetEmployeeList
  */
-@WebServlet("/GetEmployeeList")
+@WebServlet(name="GetEmployeeList", urlPatterns="/GetEmployeeList")
 public class GetEmployeeList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class EditInfoLanding
  */
-@WebServlet("/EditInfoLanding")
+@WebServlet(name="EditInfoLanding", urlPatterns="/EditInfoLanding")
 public class EditInfoLanding extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

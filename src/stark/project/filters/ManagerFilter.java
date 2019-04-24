@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class ManagerFilter
  */
-@WebFilter("/Managers/*")
+@WebFilter(filterName="ManagerFilter", urlPatterns="/Managers/*")
 public class ManagerFilter implements Filter {
 
     /**

@@ -18,7 +18,7 @@ import stark.project.util.Requests;
 /**
  * Servlet implementation class GetResolvedRequests
  */
-@WebServlet("/GetResolvedRequests")
+@WebServlet(name="GetResolvedRequests", urlPatterns="/GetResolvedRequests")
 public class GetResolvedRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

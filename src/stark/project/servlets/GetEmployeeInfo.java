@@ -18,7 +18,7 @@ import stark.project.dao.EmployeeDAO;
 /**
  * Servlet implementation class GetEmployeeInfo
  */
-@WebServlet("/GetEmployeeInfo")
+@WebServlet(name="GetEmployeeInfo", urlPatterns="/GetEmployeeInfo")
 public class GetEmployeeInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

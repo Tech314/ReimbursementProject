@@ -27,7 +27,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class ResolveRequest
  */
-@WebServlet("/ResolveRequest")
+@WebServlet(name="ResolveRequest", urlPatterns="/ResolveRequest")
 public class ResolveRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Properties prop = getProperties();

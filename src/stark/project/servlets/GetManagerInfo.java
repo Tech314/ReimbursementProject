@@ -18,7 +18,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class GetManagerInfo
  */
-@WebServlet("/GetManagerInfo")
+@WebServlet(name="GetManagerInfo", urlPatterns="/GetManagerInfo")
 public class GetManagerInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

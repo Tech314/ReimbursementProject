@@ -18,7 +18,7 @@ import stark.project.util.Requests;
 /**
  * Servlet implementation class GetRequestsByEmployee
  */
-@WebServlet("/GetRequestsByEmployee")
+@WebServlet(name="GetRequestsByEmployee", urlPatterns="/GetRequestsByEmployee")
 public class GetRequestsByEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

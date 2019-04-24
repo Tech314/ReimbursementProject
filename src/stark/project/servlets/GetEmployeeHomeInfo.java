@@ -21,7 +21,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class GetEmployeeHomeInfo
  */
-@WebServlet("/GetEmployeeHomeInfo")
+@WebServlet(name="GetEmployeeHomeInfo", urlPatterns="/GetEmployeeHomeInfo")
 public class GetEmployeeHomeInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

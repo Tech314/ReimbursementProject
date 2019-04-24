@@ -21,7 +21,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class GetResolvedEmpRequests
  */
-@WebServlet("/GetResolvedEmpRequests")
+@WebServlet(name="GetResolvedEmpRequests", urlPatterns="/GetResolvedEmpRequests")
 public class GetResolvedEmpRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -22,7 +22,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class RegisterEmployee
  */
-@WebServlet("/RegisterEmployee")
+@WebServlet(name="RegisterEmployee", urlPatterns="/RegisterEmployee")
 public class RegisterEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Properties prop = getProperties();

@@ -19,7 +19,7 @@ import stark.project.util.Requests;
 /**
  * Servlet implementation class GetAllRequests
  */
-@WebServlet("/GetAllRequests")
+@WebServlet(name="GetAllRequests", urlPatterns="/GetAllRequests")
 public class GetAllRequests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

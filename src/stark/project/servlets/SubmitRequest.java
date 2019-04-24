@@ -22,7 +22,7 @@ import stark.project.util.Users;
 /**
  * Servlet implementation class SubmitRequest
  */
-@WebServlet("/SubmitRequest")
+@WebServlet(name="SubmitRequest", urlPatterns="/SubmitRequest")
 @MultipartConfig
 public class SubmitRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
