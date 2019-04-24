@@ -33,8 +33,6 @@
 				<configuration>
 					<url>http://ec2-3-80-211-196.compute-1.amazonaws.com:8080/manager/text</url>
 					<server>tomcat</server>
-					<username>Tech314</username>
-					<password>oracle</password>
 					<path>/Reimbursment</path>
 				</configuration>
 			</plugin>
