@@ -31,7 +31,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://ec2-3-80-211-196.compute-1.amazonaws.com:8080/manager/text</url>
+					<url>http://ec2-3-80-211-196.compute-1.amazonaws.com:8080</url>
 					<server>tomcat</server>
 					<path>/Reimbursment</path>
 				</configuration>
