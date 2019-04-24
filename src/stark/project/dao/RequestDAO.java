@@ -19,7 +19,7 @@ import stark.project.util.Requests;
 public class RequestDAO {
 	
 	private static Connection conn = null;
-	private static final Properties props = getJdbcProperties();
+/*private static final Properties props = getJdbcProperties();
 	
 	private static Properties getJdbcProperties() {
 		Properties props = new Properties();
@@ -30,14 +30,14 @@ public class RequestDAO {
 			throw new RuntimeException(e);
 		}
 		return props;
-	}
+	}*/
 	
-	private static void getConnection() {
+	private static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(props.getProperty("jdbc.url"),
-												props.getProperty("jdbc.username"),
-												props.getProperty("jdbc.password"));
+			conn = DriverManager.getConnection(System.getenv("jdbc_url"),
+												System.getenv("jdbc_username"),
+												System.getenv("jdbc_password"));
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -45,6 +45,7 @@ public class RequestDAO {
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return conn;
 	}
 	
 	public static ArrayList<Requests> getAllRequests(){

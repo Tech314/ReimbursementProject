@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
+//import java.util.Properties;
 
 import stark.project.util.Users;
 
 public class EmployeeDAO {
 	
 	private static Connection conn = null;
-	private static final Properties props = getJdbcProperties();
+	/*private static final Properties props = getJdbcProperties();
 	
 	private static Properties getJdbcProperties() {
 		Properties props = new Properties();
@@ -22,14 +22,14 @@ public class EmployeeDAO {
 			throw new RuntimeException(e);
 		}
 		return props;
-	}
+	}*/
 	
 	private static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(props.getProperty("jdbc.url"),
-												props.getProperty("jdbc.username"),
-												props.getProperty("jdbc.password"));
+			conn = DriverManager.getConnection(System.getenv("jdbc_url"),
+												System.getenv("jdbc_username"),
+												System.getenv("jdbc_password"));
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
