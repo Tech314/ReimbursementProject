@@ -19,18 +19,7 @@ import stark.project.util.Requests;
 public class RequestDAO {
 	
 	private static Connection conn = null;
-/*private static final Properties props = getJdbcProperties();
-	
-	private static Properties getJdbcProperties() {
-		Properties props = new Properties();
-		try {
-			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
-		return props;
-	}*/
+
 	
 	private static Connection getConnection() {
 		try {
