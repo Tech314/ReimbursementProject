@@ -37,6 +37,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>Reimbursment</finalName>
 	</build>
 
 	<dependencies>
