@@ -16,9 +16,9 @@ public class EmployeeDAO {
 	private static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(System.getenv("jdbc_url"),
-												System.getenv("jdbc_username"),
-												System.getenv("jdbc_password"));
+			conn = DriverManager.getConnection(System.getenv("jdbcUrl"),
+												System.getenv("jdbcUsername"),
+												System.getenv("jdbcPassword"));
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
