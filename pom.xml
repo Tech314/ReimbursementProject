@@ -36,6 +36,7 @@
 					<url>http://ec2-3-91-57-134.compute-1.amazonaws.com:8080/manager/text</url>
 					<server>tomcat</server>
 					<path>/Reimbursment</path>
+					<update>true</update>
 				</configuration>
 			</plugin>
 		</plugins>
