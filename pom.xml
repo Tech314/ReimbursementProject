@@ -24,8 +24,8 @@
 				<version>2.6</version>
 				<configuration>
 				<!-- 	<failOnMissingWebXml>false</failOnMissingWebXml> -->
-				<webXml>/WEB-INF/web.xml</webXml>
-				<warSourceDirectory>/</warSourceDirectory>
+				<webXml>/WebContent/WEB-INF/web.xml</webXml>
+				<warSourceDirectory>/WebContent</warSourceDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
