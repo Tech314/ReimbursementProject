@@ -25,6 +25,7 @@
 				<configuration>
 				<!-- 	<failOnMissingWebXml>false</failOnMissingWebXml> -->
 				<warSourceDirectory>Reimbursment/WebContent</warSourceDirectory>
+				<webXml>Reimbursment/WebContent/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
 			<plugin>
