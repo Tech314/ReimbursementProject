@@ -24,6 +24,7 @@ public class RequestDAO {
 	private static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println(System.getProperty("jdbcUrl"));
 			conn = DriverManager.getConnection(System.getProperty("jdbcUrl"),
 												System.getProperty("jdbcUsername"),
 												System.getProperty("jdbcPassword"));
