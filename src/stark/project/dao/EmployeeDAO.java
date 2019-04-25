@@ -33,9 +33,9 @@ private static final Properties props = getJdbcProperties();
 	private static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(props.getProperty("jdbc.url"),
-												props.getProperty("jdbc.username"),
-												props.getProperty("jdbc.password"));
+			conn = DriverManager.getConnection(props.getProperty("jdbcUrl"),
+												props.getProperty("jdbcUsername"),
+												props.getProperty("jdbcPassword"));
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
