@@ -26,6 +26,10 @@ public class EmployeeDAO {
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		catch(NullPointerException e) {
+			e.printStackTrace();
+			System.err.println("environmental variables null");
+		}
 		return conn;
 	}
 	
