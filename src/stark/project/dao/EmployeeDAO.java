@@ -54,7 +54,7 @@ private static final Properties props = getJdbcProperties();
 		      
 			PreparedStatement ps = null;
 			
-			ps = conn.prepareStatement("select * from Employees where user_name=? and user_pass=?");  
+			ps = conn.prepareStatement("select * from tech314.Employees where user_name=? and user_pass=?");  
 			ps.setString(1,name);  
 			ps.setString(2,pass);  
 			
@@ -85,7 +85,7 @@ private static final Properties props = getJdbcProperties();
 		      
 			PreparedStatement ps = null;
 			
-			ps = conn.prepareStatement("select * from Employees where user_name=?");  
+			ps = conn.prepareStatement("select * from tech314.Employees where user_name=?");  
 			ps.setString(1,uname);   
 			
 			ResultSet rs = ps.executeQuery();
@@ -125,7 +125,7 @@ private static final Properties props = getJdbcProperties();
 		      
 			PreparedStatement ps = null;
 			
-			ps = conn.prepareStatement("select * from Employees where employee_id=?");  
+			ps = conn.prepareStatement("select * from tech314.Employees where employee_id=?");  
 			ps.setInt(1,eid);   
 			
 			ResultSet rs = ps.executeQuery();
@@ -163,7 +163,7 @@ private static final Properties props = getJdbcProperties();
 			getConnection();
 			
 			int id = (int)(1000 + Math.random()*4000);
-			PreparedStatement idCheck = conn.prepareStatement("Select * from employees where employee_id=?");
+			PreparedStatement idCheck = conn.prepareStatement("Select * from tech314.employees where employee_id=?");
 			idCheck.setInt(1, id);
 			ResultSet rs = idCheck.executeQuery();
 			
@@ -176,7 +176,7 @@ private static final Properties props = getJdbcProperties();
 			rs.close();
 			
 			
-			PreparedStatement ps = conn.prepareStatement("Insert into employees"
+			PreparedStatement ps = conn.prepareStatement("Insert into tech314.employees"
 					+ "(employee_id,fname,lname,user_name,user_pass,email)"
 					+ "values (?,?,?,?,?,?)");
 			ps.setInt(1, id);
@@ -208,7 +208,7 @@ private static final Properties props = getJdbcProperties();
 		try {
 			getConnection();
 			
-			PreparedStatement ps = conn.prepareStatement("Update employees "
+			PreparedStatement ps = conn.prepareStatement("Update tech314.employees "
 					+ "set user_name=?, email=?, user_pass=? "
 					+ "where employee_id=?");
 			ps.setInt(4, Integer.parseInt(emp.getId()));
@@ -241,7 +241,7 @@ private static final Properties props = getJdbcProperties();
 		      
 			PreparedStatement ps = null;
 			
-			ps = conn.prepareStatement("select * from Employees");  
+			ps = conn.prepareStatement("select * from tech314.Employees");  
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -278,7 +278,7 @@ private static final Properties props = getJdbcProperties();
 		getConnection();
 		
 		try {
-			PreparedStatement ps = conn.prepareStatement("update employees set user_pass=? where employee_id=?");
+			PreparedStatement ps = conn.prepareStatement("update tech314.employees set user_pass=? where employee_id=?");
 			ps.setString(1, newPass);
 			ps.setInt(2, eid);
 			

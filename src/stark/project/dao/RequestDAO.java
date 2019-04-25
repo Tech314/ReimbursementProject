@@ -59,7 +59,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
-			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where employee_id=?");
 			Requests req = null;
 			
 			while(rs.next()) {
@@ -117,7 +117,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
-			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where employee_id=?");
 			
 			if(rs.next()) {
 				req = new Requests(
@@ -171,7 +171,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
-			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where employee_id=?");
 			Requests req = null;
 			
 			while(rs.next()) {
@@ -228,7 +228,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
-			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where employee_id=?");
 			Requests req = null;
 			
 			while(rs.next()) {
@@ -287,7 +287,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
-			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where employee_id=?");
 			Requests req = null;
 			
 			while(rs.next()) {
@@ -346,7 +346,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
-			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where employee_id=?");
 			Requests req = null;
 			
 			while(rs.next()) {
@@ -405,7 +405,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet emp = null;
 			ResultSet man = null;
 			PreparedStatement es = conn.prepareStatement("select fname,lname,email from employees where employee_id=?");
-			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where manager_id=?");
+			PreparedStatement ms = conn.prepareStatement("select fname,lname from managers where employee_id=?");
 			Requests req = null;
 			
 			while(rs.next()) {

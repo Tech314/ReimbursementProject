@@ -88,7 +88,7 @@ private static final Properties props = getJdbcProperties();
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				u.setId("" + rs.getInt("Manager_ID"));
+				u.setId("" + rs.getInt("employee_id"));
 				u.setFname(rs.getString("fname"));
 				u.setLname(rs.getString("lname"));
 				u.setUname(rs.getString("user_name"));
@@ -122,13 +122,13 @@ private static final Properties props = getJdbcProperties();
 		      
 			PreparedStatement ps = null;
 			
-			ps = conn.prepareStatement("select * from Managers where manager_id=?");  
+			ps = conn.prepareStatement("select * from Managers where employee_id=?");  
 			ps.setInt(1,eid);   
 			
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				u.setId("" + rs.getInt("Manager_ID"));
+				u.setId("" + rs.getInt("employee_id"));
 				u.setFname(rs.getString("fname"));
 				u.setLname(rs.getString("lname"));
 				u.setUname(rs.getString("user_name"));
@@ -160,7 +160,7 @@ private static final Properties props = getJdbcProperties();
 			
 			PreparedStatement ps = conn.prepareStatement("Update managers "
 					+ "set user_name=?, email=?, user_pass=?"
-					+ "where manager_id=?");
+					+ "where employee_id=?");
 			ps.setInt(4, Integer.parseInt(emp.getId()));
 			ps.setString(1, emp.getUname());
 			ps.setString(3, emp.getPass());
@@ -186,7 +186,7 @@ private static final Properties props = getJdbcProperties();
 		getConnection();
 		
 		try {
-			PreparedStatement ps = conn.prepareStatement("update managers set user_pass=? where manager_id=?");
+			PreparedStatement ps = conn.prepareStatement("update managers set user_pass=? where employee_id=?");
 			ps.setString(1, newPass);
 			ps.setInt(2, eid);
 			
