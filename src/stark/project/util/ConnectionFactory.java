@@ -6,11 +6,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-
 public class ConnectionFactory {
-	
+
 	private static Connection conn = null;
 	private static final Properties props = getJdbcProperties();
+
 	private static Properties getJdbcProperties() {
 		Properties props = new Properties();
 		try {
@@ -22,17 +22,14 @@ public class ConnectionFactory {
 		return props;
 	}
 
-	public static Connection initializeConnection() {
+	public static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(props.getProperty("jdbc.url"),
-												props.getProperty("jdbc.username"),
-												props.getProperty("jdbc.password"));
+			conn = DriverManager.getConnection(props.getProperty("jdbcUrl"), props.getProperty("jdbcUsername"),
+					props.getProperty("jdbcPassword"));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return conn;

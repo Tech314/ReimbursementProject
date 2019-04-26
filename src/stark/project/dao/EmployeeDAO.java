@@ -1,56 +1,23 @@
 package stark.project.dao;
 
-import java.io.IOException;
-//import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Properties;
-import java.util.Properties;
 
+import stark.project.util.ConnectionFactory;
 import stark.project.util.Users;
 
-public class EmployeeDAO {
+public class EmployeeDAO implements Login {
 	
 	private static Connection conn = null;
-private static final Properties props = getJdbcProperties();
 	
-	private static Properties getJdbcProperties() {
-		Properties props = new Properties();
-		try {
-			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
-		return props;
-	}
-	
-	private static Connection getConnection() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(props.getProperty("jdbcUrl"),
-												props.getProperty("jdbcUsername"),
-												props.getProperty("jdbcPassword"));
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return conn;
-	}
-	
-	public static boolean validate(String name,String pass) {
+	public boolean validate(String name,String pass) {
 		boolean status = false;  
 		
-		try{    
-			getConnection();
+		try(Connection conn = ConnectionFactory.getConnection()){    
 		      
 			PreparedStatement ps = null;
 			
@@ -65,23 +32,13 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e){
 			e.printStackTrace();
 		} 
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
 		return status;  
 	}
 	
 	public static Users getInfo(String uname) {
 		Users u = new Users();
 		
-		try{  
-			getConnection(); 
+		try(Connection conn = ConnectionFactory.getConnection()){   
 		      
 			PreparedStatement ps = null;
 			
@@ -104,15 +61,6 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e){
 			e.printStackTrace();
 		} 
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return u;
 	}
@@ -120,9 +68,8 @@ private static final Properties props = getJdbcProperties();
 	public static Users getInfo(int eid) {
 		Users u = new Users();
 		
-		try{  
-			getConnection(); 
-		      
+		try(Connection conn = ConnectionFactory.getConnection()){  
+			
 			PreparedStatement ps = null;
 			
 			ps = conn.prepareStatement("select * from tech314.Employees where employee_id=?");  
@@ -144,23 +91,13 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e){
 			e.printStackTrace();
 		} 
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return u;
 	}
 	
 	public static long insertEmployee(Users emp) {
 		long records = 0;
-		try {
-			getConnection();
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			
 			int id = (int)(1000 + Math.random()*4000);
 			PreparedStatement idCheck = conn.prepareStatement("Select * from tech314.employees where employee_id=?");
@@ -191,22 +128,13 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return records;
 	}
 	
 	public static long editEmpInf(Users emp) {
 		long records = 0;
-		try {
-			getConnection();
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			
 			PreparedStatement ps = conn.prepareStatement("Update tech314.employees "
 					+ "set user_name=?, email=?, user_pass=? "
@@ -221,23 +149,14 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return records;
 	}
 	
 	public static List<Users> getEmployeeList(){
 		List<Users> users = new ArrayList<Users>();
-		getConnection();
 		
-		try{ 
+		try(Connection conn = ConnectionFactory.getConnection()){ 
 		      
 			PreparedStatement ps = null;
 			
@@ -260,24 +179,14 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e){
 			e.printStackTrace();
 		} 
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return users;
 	}
 	
 	public static boolean resetPass(int eid, String newPass) {
 		boolean reset = false;
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("update tech314.employees set user_pass=? where employee_id=?");
 			ps.setString(1, newPass);
 			ps.setInt(2, eid);

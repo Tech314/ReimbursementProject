@@ -3,57 +3,24 @@ package stark.project.dao;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-//import java.util.Properties;
-import java.util.Properties;
 
-//import javax.servlet.http.Part;
+import stark.project.util.ConnectionFactory;
 
 import stark.project.util.Requests;
-//import stark.project.util.Users;
 
 public class RequestDAO {
 	
 	private static Connection conn = null;
-private static final Properties props = getJdbcProperties();
-	
-	private static Properties getJdbcProperties() {
-		Properties props = new Properties();
-		try {
-			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
-		return props;
-	}
-	
-	private static Connection getConnection() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(props.getProperty("jdbcUrl"),
-					props.getProperty("jdbcUsername"),
-					props.getProperty("jdbcPassword"));
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return conn;
-	}
-	
+
 	public static ArrayList<Requests> getAllRequests(){
 		ArrayList<Requests> requests = new ArrayList<Requests>();
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from requests order by request_id desc");
 			ResultSet emp = null;
@@ -94,23 +61,14 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return requests;
 	}
 	
 	public static Requests getRequest(int reqId) {
 		Requests req = null;
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement st = conn.prepareStatement("select * from requests where request_id=? order by request_id desc");
 			st.setInt(1, reqId);
 			ResultSet rs = st.executeQuery();
@@ -149,23 +107,14 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return req;
 	}
 	
 	public static ArrayList<Requests> getPendingRequests(){
 		ArrayList<Requests> requests = new ArrayList<Requests>();
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement st = conn.prepareStatement("select * from requests where request_status='Pending' order by request_id desc");
 			ResultSet rs = st.executeQuery();
 			ResultSet emp = null;
@@ -206,23 +155,14 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return requests;
 	}
 	
 	public static ArrayList<Requests> getResolvedRequests(){
 		ArrayList<Requests> requests = new ArrayList<Requests>();
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from requests where request_status='Resolved' order by request_id desc");
 			ResultSet emp = null;
@@ -277,9 +217,8 @@ private static final Properties props = getJdbcProperties();
 	
 	public static ArrayList<Requests> getAllRequests(int uid){
 		ArrayList<Requests> requests = new ArrayList<Requests>();
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			//PreparedStatement st = conn.prepareStatement("Select e.fname,e.lname,r.request_date,r.expense_date,r.request_amt,r.request_desc,r.receipt_photo,r.request_status,r.request_decision,m.fname,m.lname from employees e,managers m,requests r where e.employee_id=r.employee_id and r.employee_id=?");
 			PreparedStatement st = conn.prepareStatement("select * from requests where employee_id=?");
 			st.setInt(1, uid);
@@ -322,23 +261,14 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return requests;
 	}
 	
 	public static ArrayList<Requests> getPendingRequests(int uid){
 		ArrayList<Requests> requests = new ArrayList<Requests>();
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			//PreparedStatement st = conn.prepareStatement("Select e.fname,e.lname,r.request_date,r.expense_date,r.request_amt,r.request_desc,r.receipt_photo,r.request_status,r.request_decision,m.fname,m.lname from employees e,managers m,requests r where e.employee_id=r.employee_id and r.employee_id=?");
 			PreparedStatement st = conn.prepareStatement("select * from requests where employee_id=? and request_status='Pending'");
 			st.setInt(1, uid);
@@ -381,23 +311,14 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return requests;
 	}
 	
 	public static ArrayList<Requests> getResolvedRequests(int uid){
 		ArrayList<Requests> requests = new ArrayList<Requests>();
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			//PreparedStatement st = conn.prepareStatement("Select e.fname,e.lname,r.request_date,r.expense_date,r.request_amt,r.request_desc,r.receipt_photo,r.request_status,r.request_decision,m.fname,m.lname from employees e,managers m,requests r where e.employee_id=r.employee_id and r.employee_id=?");
 			PreparedStatement st = conn.prepareStatement("select * from requests where employee_id=? and request_status='Resolved'");
 			st.setInt(1, uid);
@@ -440,22 +361,13 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return requests;
 	}
 	
 	public static void insertRequest(Requests request) {
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select count(*) from requests");
 			rs.next();
@@ -481,20 +393,12 @@ private static final Properties props = getJdbcProperties();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		
 	}
 	
 	public static void resolveRequest(Requests request) {
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("update requests set request_decision=?, manager_id=?,request_status='Resolved' where request_id=?");
 			ps.setString(1, request.getReqDecision());
 			ps.setInt(2, request.getManId());
@@ -505,21 +409,13 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		
 	}
 	
 	public static Blob getReceipt(int reqId) {
-		getConnection();
 		Blob pic = null;
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("select receipt_photo from requests where request_id=?");
 			ps.setInt(1, reqId);
 			ResultSet rs = ps.executeQuery();
@@ -530,14 +426,6 @@ private static final Properties props = getJdbcProperties();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		return pic;

@@ -1,54 +1,21 @@
 package stark.project.dao;
 
-import java.io.IOException;
-//import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.util.Properties;
-import java.util.Properties;
 
+import stark.project.util.ConnectionFactory;
 import stark.project.util.Users;
 
-public class ManagerDAO {
+public class ManagerDAO implements Login {
 	
 	private static Connection conn = null;
-private static final Properties props = getJdbcProperties();
 	
-	private static Properties getJdbcProperties() {
-		Properties props = new Properties();
-		try {
-			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
-		return props;
-	}
-	
-	private static Connection getConnection() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(props.getProperty("jdbcUrl"),
-					props.getProperty("jdbcUsername"),
-					props.getProperty("jdbcPassword"));
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return conn;
-	}
-	
-	public static boolean validate(String name, String pass) {
+	public boolean validate(String name, String pass) {
 		boolean status = false; 
-		getConnection();
 		
-		try{  
+		try(Connection conn = ConnectionFactory.getConnection()){  
 			PreparedStatement ps = null;
 			
 			ps = conn.prepareStatement("select * from Managers where user_name=? and user_pass=?");  
@@ -62,23 +29,13 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e){
 			e.printStackTrace();
 		} 
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
 		return status;  
 	}
 	
 	public static Users getInfo(String uname) {
 		Users u = new Users();
 		
-		try{  
-			getConnection(); 
+		try(Connection conn = ConnectionFactory.getConnection()){  
 		      
 			PreparedStatement ps = null;
 			
@@ -101,15 +58,6 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e){
 			e.printStackTrace();
 		} 
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return u;
 	}
@@ -117,8 +65,7 @@ private static final Properties props = getJdbcProperties();
 	public static Users getInfo(int eid) {
 		Users u = new Users();
 		
-		try{  
-			getConnection(); 
+		try(Connection conn = ConnectionFactory.getConnection()){  
 		      
 			PreparedStatement ps = null;
 			
@@ -141,22 +88,12 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e){
 			e.printStackTrace();
 		} 
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return u;
 	}
 	
 	public static void editManInf(Users emp) {
-		try {
-			getConnection();
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			
 			PreparedStatement ps = conn.prepareStatement("Update managers "
 					+ "set user_name=?, email=?, user_pass=?"
@@ -171,21 +108,13 @@ private static final Properties props = getJdbcProperties();
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		
 	}
 	
 	public static boolean resetPass(int eid, String newPass) {
 		boolean reset = false;
-		getConnection();
 		
-		try {
+		try(Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("update managers set user_pass=? where employee_id=?");
 			ps.setString(1, newPass);
 			ps.setInt(2, eid);
