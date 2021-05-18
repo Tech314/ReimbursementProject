@@ -7,9 +7,11 @@ resources:
       branches:
         include: master        
   - name: test
-    type: Artifactory
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: default-maven-artifactory
 pipelines:  
-  - name: basic_pipeline
+  - name: build
     steps:
       - name: step_1
         type: MvnBuild
