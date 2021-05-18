@@ -14,7 +14,7 @@ resources:
       buildNumber: 1          
 pipelines:  
   - name: basic_pipeline
-  steps:
+    steps:
       - name: step_1
         type: Bash
         configuration:
