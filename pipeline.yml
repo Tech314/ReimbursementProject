@@ -9,8 +9,8 @@ resources:
   - name: myBuildInfo
     type: BuildInfo
     configuration:
-      sourceArtifactory: art
-      buildName: SampleApp
+      sourceArtifactory: default-maven-virtual
+      buildName: Test
       buildNumber: 1          
 pipelines:  
   - name: basic_pipeline
