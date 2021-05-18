@@ -5,13 +5,7 @@ resources:
       gitProvider: aem_test
       path: Tech314/ReimbursementProject
       branches:
-        include: master
-  - name: myBuildInfo
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: default-maven-virtual
-      buildName: Test
-      buildNumber: 1          
+        include: master        
 pipelines:  
   - name: basic_pipeline
     steps:
