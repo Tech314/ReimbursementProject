@@ -6,14 +6,21 @@ resources:
       path: Tech314/ReimbursementProject
       branches:
         include: master        
+  - name: test
+    type: Artifactory
 pipelines:  
   - name: basic_pipeline
     steps:
       - name: step_1
-        type: Bash
+        type: MvnBuild
         configuration:
           inputResources:
-            - name: myGitRepo            
+            - name: myGitRepo  
+          mvnCommand: clean install
+          forceXrayScan: true
+          failOnScan: false
+          integrations:
+            - name: test
         execution:
           onExecute:
-            - mvn clean install
+            - echo "Building..."
